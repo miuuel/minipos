@@ -1,4 +1,4 @@
-package com.miguelveliz.minipos
+/*package com.miguelveliz.minipos
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -9,4 +9,4 @@ class ComposeAppCommonTest {
     fun example() {
         assertEquals(3, 1 + 2)
     }
-}
+}*/

@@ -49,11 +49,6 @@ val sharedModules = listOf(domainModule, dataModule, presentationModule)
  * Esta función debe llamarse una vez al inicio de la aplicación
  * (e.g., en la clase Application de Android o en iOS al iniciar).
  */
-/*fun initKoin() {
-    startKoin {
-        modules(sharedModules)
-    }
-}*/
 
 // Asegúrate de que initKoin acepte un bloque de configuración
 fun initKoin(appDeclaration: (KoinApplication) -> Unit = {}) {
