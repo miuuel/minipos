@@ -18,4 +18,5 @@ interface CuentaRepository {
      * @return Result<Unit> para éxito o un error.
      */
     suspend fun depositar(idCuenta: String, monto: Double): Result<Unit>
+
 }

@@ -26,7 +26,7 @@ class CuentaViewModel(cuentaRepository: CuentaRepository) : ViewModel(), KoinCom
     // Inyección de Dependencias de los Casos de Uso via Koin
     private val consultarSaldo: Consultar by inject()
     //private val consultarSaldo: cuentaRepo
-    private val depositar: Depositar by inject()
+    private val depositarSaldo: Depositar by inject()
 
     // Estado observable de la UI (MVI Pattern)
     private val _state = MutableStateFlow(CuentaState())
@@ -42,11 +42,11 @@ class CuentaViewModel(cuentaRepository: CuentaRepository) : ViewModel(), KoinCom
     fun processIntent(intent: CuentaIntent) {
         when (intent) {
             is CuentaIntent.ConsultarSaldo -> fetchSaldo()
-            is CuentaIntent.Depositar -> deposit(intent.monto)
+            is CuentaIntent.DepositarSaldo -> deposit(intent.monto)
         }
     }
 
-    private fun fetchSaldo() {
+     fun fetchSaldo() {
         // Ejecutamos la coroutine en el ámbito del ViewModel
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true, error = null, exitoso = false) }
@@ -66,13 +66,13 @@ class CuentaViewModel(cuentaRepository: CuentaRepository) : ViewModel(), KoinCom
         }
     }
 
-    private fun deposit(monto: Double) {
+     fun deposit(monto: Double) {
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true, error = null, exitoso = false) }
 
             val params = Depositar.Params(idCuenta = "XYZ123", monto = monto)
 
-            when (val result = depositar(params)) {
+            when (val result = depositarSaldo(params)) {
                 is Result.Success -> {
                     _state.update { it.copy(isLoading = false, exitoso = true) }
                     // Después de depositar, volvemos a consultar para actualizar el saldo

@@ -8,7 +8,7 @@ sealed class CuentaIntent {
     data object ConsultarSaldo : CuentaIntent()
 
     // 2. Acciones para Depositar
-    data class Depositar(val monto: Double) : CuentaIntent()
+    data class DepositarSaldo(val monto: Double) : CuentaIntent()
 }
 
 /**
